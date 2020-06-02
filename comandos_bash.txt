@@ -1,0 +1,5 @@
+Para el correr el contenedor del servidor estatico:
+./serve_http.sh "$PWD" 904
+
+Para el correr el contenedor del servidor php:
+./serve_php_app.sh . 8001
