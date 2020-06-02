@@ -1,0 +1,2 @@
+Para el correr el contenedor:
+./compile_ts.sh . ../js/
