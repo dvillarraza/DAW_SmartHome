@@ -28,9 +28,10 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
         usuarios.push(new User(3,"diego2","e2@hola.com"));
 
         //Mostar usuarios en el DOM
-        this.vista.mostrarUsers(usuarios);
+        //this.vista.mostrarUsers(usuarios);
 
-        this.myf.requestGET("Devices.txt",this);
+        //this.myf.requestGET("Devices.txt",this);
+        this.myf.requestGET("./dispositivos",this);
 
     }
 
@@ -46,12 +47,18 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
         //imrimo el estado del switch
         console.log(this.vista.getSwitchStateById(sw.id));
 
-        let id:string = sw.id;
-        let state:boolean = this.vista.getSwitchStateById(sw.id); //Obtengo el estdo del switch
-        
+        //let id:string = sw.id;
+        let id:number = Number(sw.id.substr(4)); //Obtengo el id en int
+        //let state:boolean = this.vista.getSwitchStateById(sw.id); //Obtengo el estdo del switch    
+        let state:number = Number(this.vista.getSwitchStateById(sw.id));
+
+
         let data:object = {"id":id, "state":state};
 
-        this.myf.requestPOST("Device.php", data, this) //Hace un eco devuleve lo mismo que se envia
+        console.log(data);
+
+       //this.myf.requestPOST("Device.php", data, this) //Hace un eco devuleve lo mismo que se envia
+       this.myf.requestPOST("./dispositivos", data, this) //Hace un eco devuleve lo mismo que se envia
            
     }
 

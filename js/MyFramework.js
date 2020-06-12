@@ -28,12 +28,10 @@ class MyFramework {
         xhr.open('GET', url, true);
         xhr.send(null);
     }
+    //El parametro data es lo que mando al servidor, puede ser un objeto Java o un diccionario
     requestPOST(url, data, listener) {
-        let formData = new FormData();
-        for (let key in data) {
-            formData.append(key, data[key]);
-        }
         let xhr = new XMLHttpRequest();
+        //Recibo la respuesta
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200)
@@ -43,6 +41,18 @@ class MyFramework {
             }
         };
         xhr.open("POST", url);
-        xhr.send(formData);
+        console.log(data);
+        // envio JSON en body de request (Usar con NODEJS)
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(data));
+        //______________________________
+        // envio Formdata en body de request (Usar con Apache,PythonWS,etc.)
+        /*  let formData:FormData = new FormData();
+          for(let key in data) {
+              formData.append(key, data[key]); //Diccionario = Clave, Valor
+          }
+          
+          xhr.send(formData) //Los datos van en un formato particular asi el server los puede parsear e interpretar*/
+        //______________________________
     }
 }

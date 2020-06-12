@@ -46,9 +46,10 @@ class ViewMainPage {
         }
         ul.innerHTML = lis;
     }
+    //Devuelve el estado del On o Off del switch pasado por id
     getSwitchStateById(id) {
         let sw = this.myf.getElementByID(id);
-        let input = sw;
+        let input = sw; //Hago un cast para poder leer la propiedad cheked
         return input.checked;
     }
 }

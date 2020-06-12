@@ -12,8 +12,9 @@ class Main {
         usuarios.push(new User(2, "diego1", "e1@hola.com"));
         usuarios.push(new User(3, "diego2", "e2@hola.com"));
         //Mostar usuarios en el DOM
-        this.vista.mostrarUsers(usuarios);
-        this.myf.requestGET("Devices.txt", this);
+        //this.vista.mostrarUsers(usuarios);
+        //this.myf.requestGET("Devices.txt",this);
+        this.myf.requestGET("./dispositivos", this);
     }
     //Ejercicio 4-2
     handleEvent(evt) {
@@ -22,10 +23,14 @@ class Main {
         console.log(sw.id);
         //imrimo el estado del switch
         console.log(this.vista.getSwitchStateById(sw.id));
-        let id = sw.id;
-        let state = this.vista.getSwitchStateById(sw.id); //Obtengo el estdo del switch
+        //let id:string = sw.id;
+        let id = Number(sw.id.substr(4)); //Obtengo el id en int
+        //let state:boolean = this.vista.getSwitchStateById(sw.id); //Obtengo el estdo del switch    
+        let state = Number(this.vista.getSwitchStateById(sw.id));
         let data = { "id": id, "state": state };
-        this.myf.requestPOST("Device.php", data, this); //Hace un eco devuleve lo mismo que se envia
+        console.log(data);
+        //this.myf.requestPOST("Device.php", data, this) //Hace un eco devuleve lo mismo que se envia
+        this.myf.requestPOST("./dispositivos", data, this); //Hace un eco devuleve lo mismo que se envia
     }
     handleGETResponse(status, response) {
         console.log("vino respuesta de log");
